@@ -1,19 +1,13 @@
 package com.kerem.packetservice.api.controllers;
 
-import com.kerem.packetservice.business.abstracts.RecordService;
-import com.kerem.packetservice.business.abstracts.SongService;
-import com.kerem.packetservice.business.dto.requests.create.CreateRecordRequest;
-import com.kerem.packetservice.business.dto.requests.create.CreateSongRequest;
-import com.kerem.packetservice.business.dto.requests.update.UpdateRecordRequest;
-import com.kerem.packetservice.business.dto.requests.update.UpdateSongRequest;
-import com.kerem.packetservice.business.dto.responses.create.CreateRecordResponse;
-import com.kerem.packetservice.business.dto.responses.create.CreateSongResponse;
-import com.kerem.packetservice.business.dto.responses.get.GetAllRecordsResponse;
-import com.kerem.packetservice.business.dto.responses.get.GetAllSongsResponse;
-import com.kerem.packetservice.business.dto.responses.get.GetRecordResponse;
-import com.kerem.packetservice.business.dto.responses.get.GetSongResponse;
-import com.kerem.packetservice.business.dto.responses.update.UpdateRecordResponse;
-import com.kerem.packetservice.business.dto.responses.update.UpdateSongResponse;
+import com.kerem.packetservice.service.abstracts.SongService;
+import com.kerem.packetservice.service.dto.requests.create.CreateSongRequest;
+import com.kerem.packetservice.service.dto.requests.update.UpdateSongRequest;
+import com.kerem.packetservice.service.dto.responses.create.CreateSongResponse;
+import com.kerem.packetservice.service.dto.responses.get.GetAllSongsResponse;
+import com.kerem.packetservice.service.dto.responses.get.GetSongResponse;
+import com.kerem.packetservice.service.dto.responses.update.UpdateSongResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -36,12 +30,12 @@ public class SongController {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateSongResponse add(@RequestBody CreateSongRequest request) {
+    public CreateSongResponse add(@Valid @RequestBody CreateSongRequest request) {
         return service.add(request);
     }
 
     @PutMapping("/{id}")
-    public UpdateSongResponse update(@PathVariable int id, @RequestBody UpdateSongRequest request) {
+    public UpdateSongResponse update(@PathVariable int id,@Valid @RequestBody UpdateSongRequest request) {
         return service.update(id, request);
     }
 

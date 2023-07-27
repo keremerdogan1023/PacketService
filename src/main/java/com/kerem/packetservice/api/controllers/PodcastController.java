@@ -1,19 +1,13 @@
 package com.kerem.packetservice.api.controllers;
 
-import com.kerem.packetservice.business.abstracts.AudiobookService;
-import com.kerem.packetservice.business.abstracts.PodcastService;
-import com.kerem.packetservice.business.dto.requests.create.CreateAudiobookRequest;
-import com.kerem.packetservice.business.dto.requests.create.CreatePodcastRequest;
-import com.kerem.packetservice.business.dto.requests.update.UpdateAudiobookRequest;
-import com.kerem.packetservice.business.dto.requests.update.UpdatePodcastRequest;
-import com.kerem.packetservice.business.dto.responses.create.CreateAudiobookResponse;
-import com.kerem.packetservice.business.dto.responses.create.CreatePodcastResponse;
-import com.kerem.packetservice.business.dto.responses.get.GetAllAudiobooksResponse;
-import com.kerem.packetservice.business.dto.responses.get.GetAllPodcastsResponse;
-import com.kerem.packetservice.business.dto.responses.get.GetAudiobookResponse;
-import com.kerem.packetservice.business.dto.responses.get.GetPodcastResponse;
-import com.kerem.packetservice.business.dto.responses.update.UpdateAudiobookResponse;
-import com.kerem.packetservice.business.dto.responses.update.UpdatePodcastResponse;
+import com.kerem.packetservice.service.abstracts.PodcastService;
+import com.kerem.packetservice.service.dto.requests.create.CreatePodcastRequest;
+import com.kerem.packetservice.service.dto.requests.update.UpdatePodcastRequest;
+import com.kerem.packetservice.service.dto.responses.create.CreatePodcastResponse;
+import com.kerem.packetservice.service.dto.responses.get.GetAllPodcastsResponse;
+import com.kerem.packetservice.service.dto.responses.get.GetPodcastResponse;
+import com.kerem.packetservice.service.dto.responses.update.UpdatePodcastResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -36,12 +30,12 @@ public class PodcastController {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreatePodcastResponse add(@RequestBody CreatePodcastRequest request) {
+    public CreatePodcastResponse add(@Valid  @RequestBody CreatePodcastRequest request) {
         return service.add(request);
     }
 
     @PutMapping("/{id}")
-    public UpdatePodcastResponse update(@PathVariable int id, @RequestBody UpdatePodcastRequest request) {
+    public UpdatePodcastResponse update(@PathVariable int id,@Valid @RequestBody UpdatePodcastRequest request) {
         return service.update(id, request);
     }
 

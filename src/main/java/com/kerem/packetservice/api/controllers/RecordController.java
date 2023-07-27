@@ -1,19 +1,13 @@
 package com.kerem.packetservice.api.controllers;
 
-import com.kerem.packetservice.business.abstracts.AudiobookService;
-import com.kerem.packetservice.business.abstracts.RecordService;
-import com.kerem.packetservice.business.dto.requests.create.CreateAudiobookRequest;
-import com.kerem.packetservice.business.dto.requests.create.CreateRecordRequest;
-import com.kerem.packetservice.business.dto.requests.update.UpdateAudiobookRequest;
-import com.kerem.packetservice.business.dto.requests.update.UpdateRecordRequest;
-import com.kerem.packetservice.business.dto.responses.create.CreateAudiobookResponse;
-import com.kerem.packetservice.business.dto.responses.create.CreateRecordResponse;
-import com.kerem.packetservice.business.dto.responses.get.GetAllAudiobooksResponse;
-import com.kerem.packetservice.business.dto.responses.get.GetAllRecordsResponse;
-import com.kerem.packetservice.business.dto.responses.get.GetAudiobookResponse;
-import com.kerem.packetservice.business.dto.responses.get.GetRecordResponse;
-import com.kerem.packetservice.business.dto.responses.update.UpdateAudiobookResponse;
-import com.kerem.packetservice.business.dto.responses.update.UpdateRecordResponse;
+import com.kerem.packetservice.service.abstracts.RecordService;
+import com.kerem.packetservice.service.dto.requests.create.CreateRecordRequest;
+import com.kerem.packetservice.service.dto.requests.update.UpdateRecordRequest;
+import com.kerem.packetservice.service.dto.responses.create.CreateRecordResponse;
+import com.kerem.packetservice.service.dto.responses.get.GetAllRecordsResponse;
+import com.kerem.packetservice.service.dto.responses.get.GetRecordResponse;
+import com.kerem.packetservice.service.dto.responses.update.UpdateRecordResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -35,12 +29,12 @@ public class RecordController {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateRecordResponse add(@RequestBody CreateRecordRequest request) {
+    public CreateRecordResponse add(@Valid  @RequestBody CreateRecordRequest request) {
         return service.add(request);
     }
 
     @PutMapping("/{id}")
-    public UpdateRecordResponse update(@PathVariable int id, @RequestBody UpdateRecordRequest request) {
+    public UpdateRecordResponse update(@PathVariable int id,@Valid @RequestBody UpdateRecordRequest request) {
         return service.update(id, request);
     }
 
